@@ -1,27 +1,85 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client'
+import './index.css'
 
 
 const App = () => {
     return (
-        <div>
-            <h1>Hello React!</h1>
-            <Pizza />
-            <Pizza />
-            <Pizza />
+        <div className="container">
+            <Header />
+            <Menu />
+            <Footer />
         </div>
     );
 };
 
-function Pizza() {
+function Header() {
+    //const style = {color: "red", fontSize: "48px", textTransform: "uppercase"}
     return (
-        <div>
-            <img src="pizzas/focaccia.jpg" alt=""/>
-            <h2>Pizza Focaccia</h2>
-            <p>Bread with italian olive oil and rosemary</p>
+        <header className="header">
+            <h1>Fast React Pizza Co.</h1>
+        </header>
+
+    );
+}
+
+function Menu() {
+    return (
+        <main className="menu">
+            <h2>Our Menu</h2>
+            <div>
+                {pizzaData.map(pizza =>
+                    (<Pizza
+                        name={pizza.name}
+                        ingredient={pizza.ingredients}
+                        photo={pizza.photoName}
+                        price={pizza.price}
+                    />))}
+            </div>
+            {/*<Pizza
+                name="Pizza Focaccia"
+                ingredient="Bread with italian olive oil and rosemary"
+                photo="pizzas/focaccia.jpg"
+                price={10}
+            />*/}
+        </main>
+    );
+}
+
+function Pizza(props) {
+    return (
+        <div className="pizza">
+            <img src={props.photo} alt={props.name}/>
+            <div className="">
+                <h3>{props.name}</h3>
+                <p>{props.ingredient}</p>
+                <span>{props.price + 3}</span>
+            </div>
         </div>
     );
 }
+
+function Footer() {
+    const hour = new Date().getHours();
+    console.log(hour);
+    const openHour = 8;
+    const closeHour = 22;
+    const isOpen = hour >= openHour || hour <= closeHour;
+    console.log(isOpen);
+
+    // if (hour >= closeHour || hour <= openHour)
+    //     alert(" Sorry we're closed");
+    // else
+    //     alert("We're currently open!");
+
+    return (
+        <footer className="footer">{new Date().toLocaleTimeString()}. We are currently open</footer>
+    )
+}
+
+
+
+
 
 
 // React v18 render
