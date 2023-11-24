@@ -24,47 +24,42 @@ function Header() {
 }
 
 function Menu() {
+    const pizzas = pizzaData;
+    const numPizzas = pizzas.length
     return (
         <main className="menu">
             <h2>Our Menu</h2>
             <div>
-                {pizzaData.map(pizza =>
-                    (<Pizza
-                        name={pizza.name}
-                        ingredient={pizza.ingredients}
-                        photo={pizza.photoName}
-                        price={pizza.price}
-                    />))}
+                {numPizzas > 0 && (
+                    <ul className="pizzas">
+                        {pizzaData.map(pizza =>
+                            (<Pizza pizzaObj={pizza} key={pizza.name}/>))}
+                    </ul>
+                )}
             </div>
-            {/*<Pizza
-                name="Pizza Focaccia"
-                ingredient="Bread with italian olive oil and rosemary"
-                photo="pizzas/focaccia.jpg"
-                price={10}
-            />*/}
         </main>
     );
 }
 
 function Pizza(props) {
     return (
-        <div className="pizza">
-            <img src={props.photo} alt={props.name}/>
+        <li className="pizza">
+            <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}/>
             <div className="">
-                <h3>{props.name}</h3>
-                <p>{props.ingredient}</p>
-                <span>{props.price + 3}</span>
+                <h3>{props.pizzaObj.name}</h3>
+                <p>{props.pizzaObj.ingredients}</p>
+                <span>{props.pizzaObj.price}</span>
             </div>
-        </div>
+        </li>
     );
 }
 
 function Footer() {
     const hour = new Date().getHours();
     console.log(hour);
-    const openHour = 8;
+    const openHour = 4;
     const closeHour = 22;
-    const isOpen = hour >= openHour || hour <= closeHour;
+    const isOpen = hour >= openHour && hour <= closeHour;
     console.log(isOpen);
 
     // if (hour >= closeHour || hour <= openHour)
@@ -72,8 +67,18 @@ function Footer() {
     // else
     //     alert("We're currently open!");
 
+    // Conditional rendering
     return (
-        <footer className="footer">{new Date().toLocaleTimeString()}. We are currently open</footer>
+        <footer className="footer">
+            {isOpen && (
+                <div className="order">
+                    <p>
+                        We're are open until {closeHour}:00. Come visit us or order online.
+                    </p>
+                    <button className="btn">Order</button>
+                </div>
+            )}
+        </footer>
     )
 }
 
