@@ -23,20 +23,31 @@ function Header() {
     );
 }
 
+//Authentic Italian cuisine. 6 creative dishes to choose from. All from out stone oven, all organic, all delicious.
+
 function Menu() {
     const pizzas = pizzaData;
      const numPizzas = pizzas.length;
-    // const numPizzas = [];
+     // const numPizzas = [];
     return (
         <main className="menu">
             <h2>Our Menu</h2>
+
                 {numPizzas > 0 ? (
-                    <ul className="pizzas">
-                        {pizzaData.map(pizza =>
-                            (<Pizza pizzaObj={pizza} key={pizza.name}/>))
-                        }
-                    </ul>
-                ): <p>We're still working working in our menu. Please come back later :)</p>}
+                    <React.Fragment key=''>
+                        <p>
+                            Authentic Italian cuisine. 6 creative dishes to choose from. All from out stone oven, all organic, all delicious.
+                        </p>
+                        <ul className="pizzas">
+                            {pizzaData.map(pizza =>
+                                (<Pizza pizzaObj={pizza} key={pizza.name}/>))
+                            }
+                        </ul>
+                    </React.Fragment>
+                ): <p>
+                    We're still working working in our menu. Please come back later :)
+                   </p>
+                }
         </main>
     );
 }
