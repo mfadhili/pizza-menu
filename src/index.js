@@ -7,7 +7,7 @@ const App = () => {
     return (
         <div className="container">
             <Header />
-            <Menu />
+            <Menu pizzaData={pizzaData} />
             <Footer />
         </div>
     );
@@ -23,11 +23,8 @@ function Header() {
     );
 }
 
-//Authentic Italian cuisine. 6 creative dishes to choose from. All from out stone oven, all organic, all delicious.
-
-function Menu() {
-    const pizzas = pizzaData;
-     const numPizzas = pizzas.length;
+function Menu({pizzaData}) {
+    const numPizzas = pizzaData.length;
      // const numPizzas = [];
     return (
         <main className="menu">
@@ -59,7 +56,7 @@ function Pizza({ pizzaObj }) {
     //     return null;
 
     return (
-        <li className={`pizza ${pizzaObj.soldOut ? 'sold-out' : ''}` } >
+        <li className={`pizza ${pizzaObj.soldOut ? 'sold-out' : ''}` }>
             <img src={ pizzaObj.photoName } alt={ pizzaObj.name }/>
             <div className="">
                 <h3>{ pizzaObj.name }</h3>
